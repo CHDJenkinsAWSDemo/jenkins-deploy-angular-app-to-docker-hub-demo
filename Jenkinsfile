@@ -15,7 +15,7 @@ node {
             }    
         }     
        stage('Push image') {
-           docker.withRegistry('https://registry.hub.docker.com', 'github-app-dmo') {            
+           docker.withRegistry('https://registry.hub.docker.com', 'charleshoanduong1111-github-app') {            
        	   app.push("${env.BUILD_NUMBER}")            
            app.push("latest")        
  		}    
