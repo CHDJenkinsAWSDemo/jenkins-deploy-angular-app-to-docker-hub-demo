@@ -5,7 +5,7 @@ node {
             checkout scm    
       }     
       stage('Build image') {         
-            bat 'npm install' //chd
+            //bat 'npm install' //chd
             app = docker.build("charleshoanduong1111/angular-docker-image")    
        }     
       stage('Test image') {           
