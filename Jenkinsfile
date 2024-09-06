@@ -11,7 +11,7 @@ pipeline {
         }
         stage('Build Docker Image') {
    			 steps {
-       			 //bat 'docker build -t charleshoanduong1111/angular-docker-image:$BUILD_NUMBER .'
+       			 //sh 'docker build -t charleshoanduong1111/angular-docker-image:$BUILD_NUMBER .'
        			 //bat 'docker build -t charleshoanduong1111/jenkins:build . ' //OK
        			 bat 'docker build -t charleshoanduong1111/jenkins:%BUILD_NUMBER% . ' 
        			 
