@@ -15,7 +15,7 @@ pipeline {
        			 //sh 'docker build -t charleshoanduong1111/angular-docker-image:$BUILD_NUMBER .'
        			 //bat 'docker build -t charleshoanduong1111/jenkins:build . ' //OK
        			 //bat 'docker build -t charleshoanduong1111/jenkins:%BUILD_NUMBER% . ' ok
-       			 build_number = '%BUILD_NUMBER%'
+       			 build_number = %BUILD_NUMBER%
        			 bat 'echo build_number = '+build_number
        			 bat 'docker build -t charleshoanduong1111/jenkins:'+build_number+' . ' 
        			 
