@@ -1,8 +1,8 @@
 pipeline {
 	environment {
-    	DOCKERHUB_CREDENTIALS = credentials('charleshoanduong1111-github-app')
-    }
+    DOCKERHUB_CREDENTIALS = credentials('charleshoanduong1111-github-app')}
     agent any
+
     stages {
         stage('SCM Checkout') {
             steps {
@@ -11,9 +11,9 @@ pipeline {
         }
         stage('Build Docker Image') {
    			 steps {
-       			 //sh 'docker build -t charleshoanduong1111/angular-docker-image:$BUILD_NUMBER .'
-       			 bat 'docker build -t charleshoanduong1111/jenkins:build . ' //OK
-       			 //bat 'docker build -t charleshoanduong1111/jenkins:%BUILD_NUMBER% . ' ok       			 
+       			 //bat 'docker build -t charleshoanduong1111/angular-docker-image:$BUILD_NUMBER .'
+       			 bat 'docker build -t charleshoanduong1111/jenkins:build . ' 
+       			 
   		 	 }
 		}
 		stage('Login to Docker Hub') {
@@ -21,17 +21,20 @@ pipeline {
 				bat 'echo DOCKERHUB_CREDENTIALS_USR = %DOCKERHUB_CREDENTIALS_USR% '
         		bat 'echo DOCKERHUB_CREDENTIALS = %DOCKERHUB_CREDENTIALS% '
         		bat 'echo DOCKERHUB_CREDENTIALS_PSW = %DOCKERHUB_CREDENTIALS_PSW%'
-        		//sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-        		//sh 'echo ${DOCKERHUB_CREDENTIALS_PSW} | docker login -u ${DOCKERHUB_CREDENTIALS_USR} --password-stdin'
-        		//bat 'docker login -u=charleshoanduong1111 -p=@CHChd*211'  //OK
-        		bat 'docker login -u=%DOCKERHUB_CREDENTIALS_USR%  -p=%DOCKERHUB_CREDENTIALS_PSW%'  //OK      		
+        		//bat 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u ${DOCKERHUB_CREDENTIALS_USR} --password-stdin'
+        		//bat 'echo @CHChdChd11 | docker login -u charleshoanduong1111 --password-stdin'
+        		//bat 'docker login -u="${DOCKER_USERNAME}" -p="${DOCKER_PASSWORD}"'
+        		//bat 'docker login -u=charleshoanduong1111 -p=@CHChdChd11'  //OK
+        		//bat 'docker login -u=charleshoanduong1111 -p=@CHChdChd11'  //OK
+        		bat 'docker login -u=%DOCKERHUB_CREDENTIALS_USR%  -p=%DOCKERHUB_CREDENTIALS_PSW%'  //OK        		
     		}
-    	stage('Push Image') {
+		}
+		stage('Push Image') {
     		steps {					
        			//sh 'docker push **devopscloudbootcamp**/webapp:$BUILD_NUMBER'
         		bat 'docker push charleshoanduong1111/jenkins:build'
    			}
-		}
-	}
-  }
+		}	
+		
+    }
 }
