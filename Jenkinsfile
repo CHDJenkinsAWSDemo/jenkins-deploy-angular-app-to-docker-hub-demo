@@ -51,8 +51,8 @@ pipeline {
 		       //bat 'docker stop $(docker ps -a -q)' // Stop all running containers: docker stop $(docker ps -a -q)
 		       //bat 'docker rm $(docker ps -a -q)' // Delete all stopped containers: docker rm $(docker ps -a -q)
 		       
-		       bat 'docker build -t localhost:4200 .'
-		       bat 'docker run -d --name myjob localhost:4200'
+		       //bat 'docker build -t localhost:4200 .'
+		       bat 'docker run -d --name charleshoanduong1111-job charleshoanduong1111/jenkins:build'
 		       
 		       //# build the new image
 				//docker build -t localhost:5000/test/myapp:"${BUILD_ID}" .
