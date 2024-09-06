@@ -25,12 +25,11 @@ pipeline {
         		//bat 'docker login -u=charleshoanduong1111 -p=@CHChd*211'  //OK
         		bat 'docker login -u=%DOCKERHUB_CREDENTIALS_USR%  -p=%DOCKERHUB_CREDENTIALS_PSW%'  //OK      		
     		}
-    		stage('Push Image') {
-    			steps {					
-        			//sh 'docker push **devopscloudbootcamp**/webapp:$BUILD_NUMBER'
-        			bat 'docker push charleshoanduong1111/jenkins:build'
-    			}
-			}
+    	stage('Push Image') {
+    		steps {					
+       			//sh 'docker push **devopscloudbootcamp**/webapp:$BUILD_NUMBER'
+        		bat 'docker push charleshoanduong1111/jenkins:build'
+   			}
 		}
     }
 }
