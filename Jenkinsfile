@@ -2,7 +2,6 @@ pipeline {
 	environment {
     DOCKERHUB_CREDENTIALS = credentials('charleshoanduong1111-github-app')}
     agent any
-
     stages {
         stage('SCM Checkout') {
             steps {
@@ -13,8 +12,7 @@ pipeline {
    			 steps {
        			 //sh 'docker build -t charleshoanduong1111/angular-docker-image:$BUILD_NUMBER .'
        			 bat 'docker build -t charleshoanduong1111/jenkins:build . ' //OK
-       			 //bat 'docker build -t charleshoanduong1111/jenkins:%BUILD_NUMBER% . ' ok
-       			 
+       			 //bat 'docker build -t charleshoanduong1111/jenkins:%BUILD_NUMBER% . ' ok       			 
   		 	 }
 		}
 		stage('Login to Docker Hub') {
@@ -28,8 +26,7 @@ pipeline {
         		bat 'docker login -u=%DOCKERHUB_CREDENTIALS_USR%  -p=%DOCKERHUB_CREDENTIALS_PSW%'  //OK      		
     		}
     		stage('Push Image') {
-    			steps {
-					
+    			steps {					
         			//sh 'docker push **devopscloudbootcamp**/webapp:$BUILD_NUMBER'
         			bat 'docker push charleshoanduong1111/jenkins:build'
     			}
