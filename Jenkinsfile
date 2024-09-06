@@ -1,6 +1,7 @@
 pipeline {
 	environment {
     DOCKERHUB_CREDENTIALS = credentials('charleshoanduong1111-github-app')}
+    build_number = %BUILD_NUMBER%
     agent any
 
     stages {
@@ -13,7 +14,9 @@ pipeline {
    			 steps {
        			 //sh 'docker build -t charleshoanduong1111/angular-docker-image:$BUILD_NUMBER .'
        			 //bat 'docker build -t charleshoanduong1111/jenkins:build . ' //OK
-       			 bat 'docker build -t charleshoanduong1111/jenkins:%BUILD_NUMBER% . ' 
+       			 //bat 'docker build -t charleshoanduong1111/jenkins:%BUILD_NUMBER% . ' ok
+       			 bat 'echo build_number = '+build_number
+       			 bat 'docker build -t charleshoanduong1111/jenkins:'+build_number+' . ' 
        			 
   		 	 }
 		}
@@ -25,10 +28,14 @@ pipeline {
         		//sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
         		//sh 'echo ${DOCKERHUB_CREDENTIALS_PSW} | docker login -u ${DOCKERHUB_CREDENTIALS_USR} --password-stdin'
         		//bat 'docker login -u=charleshoanduong1111 -p=@CHChd*211'  //OK
-        		bat 'docker login -u=%DOCKERHUB_CREDENTIALS_USR%  -p=%DOCKERHUB_CREDENTIALS_PSW%'  //OK
-
-        		
+        		bat 'docker login -u=%DOCKERHUB_CREDENTIALS_USR%  -p=%DOCKERHUB_CREDENTIALS_PSW%'  //OK      		
     		}
+    		stage('Push Image') {
+    			steps {
+        			//sh 'docker push **devopscloudbootcamp**/webapp:$BUILD_NUMBER'
+        			bat 'docker push charleshoanduong1111/jenkins:'+build_number+' . ' 
+    			}
+			}
 		}
     }
 }
