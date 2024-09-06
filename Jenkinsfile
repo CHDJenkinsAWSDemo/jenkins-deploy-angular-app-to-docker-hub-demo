@@ -32,9 +32,20 @@ pipeline {
 		stage('Push Image') {
     		steps {					
        			//sh 'docker push **devopscloudbootcamp**/webapp:$BUILD_NUMBER'
-        		bat 'docker push charleshoanduong1111/jenkins:build'
+        		bat 'docker push charleshoanduong1111/jenkins:build'  //OK
    			}
 		}	
+		stage('**Deploy Application**') {
+   			 steps{
+ 		       // '''
+ 		       //cker stop webapp_ctr
+ 		       //cker run --rm -d -p 3000:3000 --name webapp_ctr **devopscloudbootcamp**/webapp:${BUILD_NUMBER}
+		       //''
+ 		       bat'
+ 		       docker stop webapp_ctr
+ 		       docker run --rm -d -p 4200:4200 -name webapp_ctr charleshoanduong1111/jenkins:build
+		        '''		        		    }
+		}
 		
     }
 }
