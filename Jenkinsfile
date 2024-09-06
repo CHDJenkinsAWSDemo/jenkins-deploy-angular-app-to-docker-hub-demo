@@ -22,9 +22,11 @@ pipeline {
         		//bat 'echo @CHChdChd11 | docker login -u charleshoanduong1111 --password-stdin'
         		//bat 'docker login -u="${DOCKER_USERNAME}" -p="${DOCKER_PASSWORD}"'
         		//bat 'docker login -u=charleshoanduong1111 -p=@CHChdChd11'  //OK
-        		bat 'docker login -u=charleshoanduong1111 -p=@CHChdChd11'  //OK
-        		bat 'echo %DOCKERHUB_CREDENTIALS% '
-        		bat 'echo %DOCKERHUB_CREDENTIALS_PSW%'
+        		//bat 'docker login -u=charleshoanduong1111 -p=@CHChdChd11'  //OK
+        		bat 'docker login -u=%DOCKERHUB_CREDENTIALS_USERNAME%  -p=%DOCKERHUB_CREDENTIALS_PSW%'  //OK
+        		bat 'echo DOCKERHUB_CREDENTIALS_USERNAME = %DOCKERHUB_CREDENTIALS_USERNAME% '
+        		bat 'echo DOCKERHUB_CREDENTIALS = %DOCKERHUB_CREDENTIALS% '
+        		bat 'echo DOCKERHUB_CREDENTIALS_PSW = %DOCKERHUB_CREDENTIALS_PSW%'
         		
     		}
 		}
