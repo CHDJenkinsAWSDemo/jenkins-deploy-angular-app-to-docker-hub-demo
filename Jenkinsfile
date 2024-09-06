@@ -1,6 +1,7 @@
 pipeline {
 	environment {
-    DOCKERHUB_CREDENTIALS = credentials('charleshoanduong1111-github-app')}
+    	DOCKERHUB_CREDENTIALS = credentials('charleshoanduong1111-github-app')
+    }
     agent any
     stages {
         stage('SCM Checkout') {
@@ -31,5 +32,6 @@ pipeline {
         		bat 'docker push charleshoanduong1111/jenkins:build'
    			}
 		}
-    }
+	}
+  }
 }
