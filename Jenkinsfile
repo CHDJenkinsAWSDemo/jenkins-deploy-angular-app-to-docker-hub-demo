@@ -23,8 +23,9 @@ pipeline {
         		//bat 'docker login -u="${DOCKER_USERNAME}" -p="${DOCKER_PASSWORD}"'
         		//bat 'docker login -u=charleshoanduong1111 -p=@CHChdChd11'  //OK
         		bat 'docker login -u=charleshoanduong1111 -p=@CHChdChd11'  //OK
-        		bat 'echo $DOCKERHUB_CREDENTIALS_PSW '
-        		bat 'echo ${DOCKERHUB_CREDENTIALS_PSW}'
+        		bat 'echo %DOCKERHUB_CREDENTIALS% '
+        		bat 'echo %DOCKERHUB_CREDENTIALS_PSW%'
+        		
     		}
 		}
     }
