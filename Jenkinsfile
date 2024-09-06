@@ -41,11 +41,20 @@ pipeline {
  		       //cker stop webapp_ctr
  		       //cker run --rm -d -p 3000:3000 --name webapp_ctr **devopscloudbootcamp**/webapp:${BUILD_NUMBER}
 		       //''
- 		       bat '''
- 		       //docker stop webapp_ctr
- 		       docker run --rm -d -p 4200:4200 -name webapp_ctr charleshoanduong1111/jenkins:build
-		        '''		        		    }
+		       
+		       //TODO
+ 		       //bat '''
+  		       //docker stop webapp_ctr
+ 		       //docker run --rm -d -p 4200:4200 -name webapp_ctr charleshoanduong1111/jenkins:build
+		       // '''		   
+		       bat 'echo TODO Deploy Application'
+		     }
 		}
+		stage('**Remove Docker image from Docker**') {
+   			 steps{
+				bat 'docker rmi $(docker images -q charleshoanduong1111/jenkins:*)'
+		     }
+		}		
 		
     }
 }
