@@ -52,7 +52,8 @@ pipeline {
 		}
 		stage('**Remove Docker image from Docker**') {
    			 steps{
-				bat 'docker rmi $(docker images -q charleshoanduong1111/jenkins:*)'
+				//bat 'docker rmi $(docker images -q charleshoanduong1111/jenkins:*)'
+				bat 'docker rmi %docker images -q charleshoanduong1111/jenkins:*%'
 		     }
 		}		
 		
