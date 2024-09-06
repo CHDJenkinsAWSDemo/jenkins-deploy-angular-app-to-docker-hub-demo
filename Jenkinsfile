@@ -53,7 +53,10 @@ pipeline {
 		stage('**Remove Docker image from Docker**') {
    			 steps{
 				//bat 'docker rmi $(docker images -q charleshoanduong1111/jenkins:*)'
-				bat 'docker rmi %docker images -q charleshoanduong1111/jenkins:*%'
+				//bat 'docker rmi %docker images -q charleshoanduong1111/jenkins:*%'
+				//bat "docker rmi -f $(docker images -f=reference='<image_name>:<tag_name>*'"
+				//bat "docker rmi $(docker images --filter=reference="nexus*/*/*:6.6.1-feature_1*" -q) -f"
+				bat 'docker rmi $(docker images --filter=reference="charleshoanduong1111/jenkins:build*" -q) -f"
 		     }
 		}		
 		
