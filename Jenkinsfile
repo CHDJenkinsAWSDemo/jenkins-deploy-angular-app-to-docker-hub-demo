@@ -1,12 +1,12 @@
 pipeline {
 	environment {
-    DOCKERHUB_CREDENTIALS = credentials('dockerhub_id')}
+    DOCKERHUB_CREDENTIALS = credentials('charleshoanduong1111-github-app')}
     agent any
 
     stages {
         stage('SCM Checkout') {
             steps {
-                git branch: 'main', credentialsId: 'dockerhub_id', url: 'https://github.com/JenkinsCiCdDemo/jenkins-pipeline-to-create-angular-docker-image-and-push-to-docker-hub-demo.git'
+                git branch: 'main', credentialsId: 'charleshoanduong1111-github-app', url: 'https://github.com/JenkinsCiCdDemo/jenkins-pipeline-to-create-angular-docker-image-and-push-to-docker-hub-demo.git'
             }
         }
         stage('Build Docker Image') {
