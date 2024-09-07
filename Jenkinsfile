@@ -44,7 +44,7 @@ pipeline {
 		       bat 'docker stop charleshoanduong1111-job && docker rm -f charleshoanduong1111-job'
 		       
 		       //# create and run a new container
-		       bat 'docker run -p 4200:4200 --name charleshoanduong1111-job charleshoanduong1111/jenkins:build_%BUILD_NUMBER%'
+		       //bat 'docker run -p 4200:4200 --name charleshoanduong1111-job charleshoanduong1111/jenkins:build_%BUILD_NUMBER%'
 		       //Ready! Next, we will access the URL http://localhost:4200/ 
 		       //and check if the application is working inside the Docker container.
 		       
