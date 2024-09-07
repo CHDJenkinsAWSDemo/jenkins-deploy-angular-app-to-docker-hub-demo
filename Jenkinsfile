@@ -49,40 +49,27 @@ pipeline {
         		bat 'docker push charleshoanduong1111/jenkins:build_%BUILD_NUMBER%'  
    			}
 		}
-		stage('Run Angular App by running docker image') {
+		stage('Run Angular App | Start a container from a docker image') {
     		steps {					
+        	    
+        	    //Run container from image online 
+        	    //bat 'docker run -p 4200:4200 --name charleshoanduong1111-job charleshoanduong1111/jenkins:build_%BUILD_NUMBER%'
 
+		        //Use "docker run -d" will start a container from image, and the container will run in background
         	    bat 'docker run -d -p 4200:4200 --name charleshoanduong1111-job charleshoanduong1111/jenkins:build_%BUILD_NUMBER%'
-
+        	    //Ready! Next, test by accessing the URL http://localhost:4200/ 
    			}
 		}
-		stage('**Deploy Application**') {
-   			 steps{
-		       bat 'echo TODO Deploy Application'
-		       
-		       // # remove the existing container
-		       //bat 'docker stop charleshoanduong1111-job && docker rm -f charleshoanduong1111-job'
-		       
-		       //# create and run a new container
-		       //bat 'docker run -p 4200:4200 --name charleshoanduong1111-job charleshoanduong1111/jenkins:build_%BUILD_NUMBER%'
-		       //Ready! Next, we will access the URL http://localhost:4200/ 
-		       //and check if the application is working inside the Docker container.
-		       
-		       //TODO - ERROR
-		       //# create and run a new container
-		       //According to tutorial I read so far, use "docker run -d" will start a container from image, 
-		       //and the container will run in background.		       
-		       //TODO
-			   //C:\ProgramData\Jenkins\.jenkins\workspace\2 push docker image wiht pipline script from scm with github jenkinsfile>
-			   //docker run -d 4200:4200 --name charleshoanduong1111-job charleshoanduong1111/jenkins:build_58 
-			   //Unable to find image '4200:4200' locally
-			   //docker: Error response from daemon: pull access denied for 4200, repository does not exist or may require 'docker login': denied: requested access to the resource is denied.
-		       //bat 'docker run -d 4200:4200 --name charleshoanduong1111-job charleshoanduong1111/jenkins:build_%BUILD_NUMBER%'
-		       //Ready! Next, we will access the URL http://localhost:4200/ 
-		       //and check if the application is working inside the Docker container.
+		stage('Remove the generated container from Docker Hub after 5 minus') {
+    		steps {			
 
-		     }
-		}
+  				echo 'Waiting 5 minutes for running angular app, then delete the container'
+  				sleep 300 // seconds	
+     
+		      	bat 'docker stop charleshoanduong1111-job && docker rm -f charleshoanduong1111-job'
+
+   			}
+		}		
 		
     }
 }
