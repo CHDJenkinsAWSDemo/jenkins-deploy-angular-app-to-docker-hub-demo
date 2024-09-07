@@ -52,7 +52,11 @@ pipeline {
 		       //bat 'docker rm $(docker ps -a -q)' // Delete all stopped containers: docker rm $(docker ps -a -q)
 		       
 		       //bat 'docker build -t localhost:4200 .'
-		       bat 'docker run -d --name charleshoanduong1111-job charleshoanduong1111/jenkins:build'
+		       //bat 'docker run -d --name charleshoanduong1111-job charleshoanduong1111/jenkins:build'  //OK
+		       
+		       bat 'docker run -p 4200:4200 --name charleshoanduong1111-job charleshoanduong1111/jenkins:build'
+		       //Ready! Next, we will access the URL http://localhost:4200/ 
+		       //and check if the application is working inside the Docker container.
 		       
 		       //# build the new image
 				//docker build -t localhost:5000/test/myapp:"${BUILD_ID}" .
