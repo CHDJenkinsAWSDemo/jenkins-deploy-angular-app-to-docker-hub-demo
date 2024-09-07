@@ -9,7 +9,7 @@ pipeline {
                 git branch: 'main', credentialsId: 'charleshoanduong1111-github-app', url: 'https://github.com/JenkinsCiCdDemo/jenkins-pipeline-to-create-angular-docker-image-and-push-to-docker-hub-demo.git'
             }
         }
-        stage('Clean up') {
+        stage('Clean up old and unused Docker images') {
    			 steps {
 				
 				 //To delete a specific image.
@@ -20,10 +20,7 @@ pipeline {
 				 //docker system prune -a -f
 				
        			 //Remove old and unused Docker images from Docker
-       			 bat 'docker image prune --all --force'
-             			 
-       			 //TODO - search container if it existed then, remove the existing container from Docker Hub
-		      	 //bat 'docker stop charleshoanduong1111-job && docker rm -f charleshoanduong1111-job'
+       			 bat 'docker image prune --all --force'            			 
        			 
   		 	 }
 		}        
@@ -60,10 +57,10 @@ pipeline {
     		steps {					
         	    
         	    //Run container from image online 
-        	    //bat 'docker run -p 4200:4200 --name charleshoanduong1111-job charleshoanduong1111/jenkins:build_%BUILD_NUMBER%'
+        	    //bat 'docker run -p 4200:4200 --name chdjob_%BUILD_NUMBER% charleshoanduong1111/jenkins:build_%BUILD_NUMBER%'
 
 		        //Use "docker run -d" will start a container from image, and the container will run in background
-        	    bat 'docker run -d -p 4200:4200 --name charleshoanduong1111-job charleshoanduong1111/jenkins:build_%BUILD_NUMBER%'
+        	    bat 'docker run -d -p 4200:4200 --name chdjob_%BUILD_NUMBER% charleshoanduong1111/jenkins:build_%BUILD_NUMBER%'
         	    //Ready! Next, test by accessing the URL http://localhost:4200/ 
    			}
 		}
@@ -73,7 +70,7 @@ pipeline {
   				echo 'Waiting 5 minutes for running angular app, then delete the container'
   				sleep 300 // seconds	
      
-		      	bat 'docker stop charleshoanduong1111-job && docker rm -f charleshoanduong1111-job'
+		      	bat 'docker stop chdjob_%BUILD_NUMBER% && docker rm -f chdjob_%BUILD_NUMBER%'
 
    			}
 		}		
