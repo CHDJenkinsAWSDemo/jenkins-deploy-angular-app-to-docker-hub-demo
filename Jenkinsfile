@@ -12,7 +12,8 @@ pipeline {
         stage('Build Docker Image') {
    			 steps {
        			 //bat 'docker build -t charleshoanduong1111/angular-docker-image:$BUILD_NUMBER .'
-       			 bat 'docker build -t charleshoanduong1111/jenkins:build . ' 
+       			 //bat 'docker build -t charleshoanduong1111/jenkins:build . ' 
+       			 bat 'docker build -t charleshoanduong1111/jenkins:build_%BUILD_NUMBER% ."
        			 
   		 	 }
 		}
@@ -32,7 +33,7 @@ pipeline {
 		stage('Push Image') {
     		steps {					
        			//sh 'docker push **devopscloudbootcamp**/webapp:$BUILD_NUMBER'
-        		bat 'docker push charleshoanduong1111/jenkins:build'  //OK
+        		bat 'docker push charleshoanduong1111/jenkins:build_%BUILD_NUMBER%'  //OK
    			}
 		}	
 		stage('**Deploy Application**') {
@@ -57,7 +58,7 @@ pipeline {
 		       //bat 'docker stop $(docker ps -q)'
 		       //bat 'docker rm $(docker ps -q)'
 		       bat 'docker stop charleshoanduong1111-job && docker rm -f charleshoanduong1111-job'
-		       bat 'docker run -p 4200:4200 --name charleshoanduong1111-job charleshoanduong1111/jenkins:build'
+		       bat 'docker run -p 4200:4200 --name charleshoanduong1111-job charleshoanduong1111/jenkins:build_%BUILD_NUMBER%'
 		       //Ready! Next, we will access the URL http://localhost:4200/ 
 		       //and check if the application is working inside the Docker container.
 		       
