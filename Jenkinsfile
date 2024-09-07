@@ -13,7 +13,7 @@ pipeline {
    			 steps {
        			 //bat 'docker build -t charleshoanduong1111/angular-docker-image:$BUILD_NUMBER .'
        			 //bat 'docker build -t charleshoanduong1111/jenkins:build . ' 
-       			 bat 'docker build -t charleshoanduong1111/jenkins:build_%BUILD_NUMBER% ."
+       			 bat 'docker build -t charleshoanduong1111/jenkins:build_%BUILD_NUMBER% .'
        			 
   		 	 }
 		}
