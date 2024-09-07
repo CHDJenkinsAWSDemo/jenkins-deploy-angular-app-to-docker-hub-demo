@@ -16,7 +16,7 @@ pipeline {
        			 bat 'docker image prune --all --force'
        			 
        			 //Remove the existing container from Docker Hub
-		      	 bat 'docker stop charleshoanduong1111-job && docker rm -f charleshoanduong1111-job'
+		      	 //bat 'docker stop charleshoanduong1111-job && docker rm -f charleshoanduong1111-job'
        			 
   		 	 }
 		}        
@@ -52,7 +52,7 @@ pipeline {
 		stage('Run Angular App by running docker image') {
     		steps {					
 
-        	    bat 'docker run -p 4200:4200 --name charleshoanduong1111-job charleshoanduong1111/jenkins:build_%BUILD_NUMBER%'
+        	    bat 'docker run -d -p 4200:4200 --name charleshoanduong1111-job charleshoanduong1111/jenkins:build_%BUILD_NUMBER%'
 
    			}
 		}
