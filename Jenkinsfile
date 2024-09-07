@@ -64,11 +64,11 @@ pipeline {
         	    //Ready! Next, test by accessing the URL http://localhost:4200/ 
    			}
 		}
-		stage('Remove the generated container from Docker Hub after 5 minus') {
+		stage('Remove the generated container from Docker Hub after 2 minus') {
     		steps {			
 
-  				echo 'Waiting 5 minutes for running angular app, then delete the container'
-  				sleep 300 // seconds	
+  				echo 'Waiting 2 minutes for running angular app, then delete the container'
+  				sleep 120 // seconds	
      
 		      	bat 'docker stop chdjob_%BUILD_NUMBER% && docker rm -f chdjob_%BUILD_NUMBER%'
 
