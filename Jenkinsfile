@@ -21,11 +21,8 @@ pipeline {
 				
        			 //Remove old and unused Docker images from Docker
        			 bat 'docker image prune --all --force'
-       			 
-       			 
-       			 
-       			 
-       			 //Remove the existing container from Docker Hub
+             			 
+       			 //TODO - search container if it existed then, remove the existing container from Docker Hub
 		      	 //bat 'docker stop charleshoanduong1111-job && docker rm -f charleshoanduong1111-job'
        			 
   		 	 }
