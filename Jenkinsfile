@@ -12,8 +12,18 @@ pipeline {
         stage('Clean up') {
    			 steps {
 				
+				 //To delete a specific image.
+				 //docker rmi <image_id>: 
+				
+				 //Docker provides a single command that will clean up any resources — images, containers, volumes, and networks — 
+				 //that are dangling (not tagged or associated with a container)
+				 //docker system prune -a -f
+				
        			 //Remove old and unused Docker images from Docker
        			 bat 'docker image prune --all --force'
+       			 
+       			 
+       			 
        			 
        			 //Remove the existing container from Docker Hub
 		      	 //bat 'docker stop charleshoanduong1111-job && docker rm -f charleshoanduong1111-job'
