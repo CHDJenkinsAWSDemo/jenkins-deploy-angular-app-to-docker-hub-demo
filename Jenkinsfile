@@ -38,38 +38,22 @@ pipeline {
 		}	
 		stage('**Deploy Application**') {
    			 steps{
- 		       // '''
- 		       //cker stop webapp_ctr
- 		       //cker run --rm -d -p 3000:3000 --name webapp_ctr **devopscloudbootcamp**/webapp:${BUILD_NUMBER}
-		       //''
-		       
-		       //TODO
- 		       //bat '''
-  		       //docker stop webapp_ctr
- 		       //docker run --rm -d -p 4200:4200 -name webapp_ctr charleshoanduong1111/jenkins:build
-		       // '''		   
 		       bat 'echo TODO Deploy Application'
-		       //bat 'docker stop $(docker ps -a -q)' // Stop all running containers: docker stop $(docker ps -a -q)
-		       //bat 'docker rm $(docker ps -a -q)' // Delete all stopped containers: docker rm $(docker ps -a -q)
 		       
-		       //bat 'docker build -t localhost:4200 .'
-		       //bat 'docker run -d --name charleshoanduong1111-job charleshoanduong1111/jenkins:build'  //OK
-		       
-		       //bat 'docker stop $(docker ps -q)'
-		       //bat 'docker rm $(docker ps -q)'
+		       // # remove the existing container
 		       bat 'docker stop charleshoanduong1111-job && docker rm -f charleshoanduong1111-job'
+		       
+		       //# create and run a new container
 		       bat 'docker run -p 4200:4200 --name charleshoanduong1111-job charleshoanduong1111/jenkins:build_%BUILD_NUMBER%'
 		       //Ready! Next, we will access the URL http://localhost:4200/ 
 		       //and check if the application is working inside the Docker container.
 		       
-		       //# build the new image
-				//docker build -t localhost:5000/test/myapp:"${BUILD_ID}" .
-
-			   // # remove the existing container
-				//docker rm -f myjob && echo "container myjob removed" || echo "container myjob does not exist"
-
-			   //# create and run a new container
-				//docker run -d --name myjob localhost:5000/test/myapp:"${BUILD_ID}"
+		       //# create and run a new container
+		       //According to tutorial I read so far, use "docker run -d" will start a container from image, 
+		       //and the container will run in background.
+		       bat 'docker run -d 4200:4200 --name charleshoanduong1111-job charleshoanduong1111/jenkins:build_%BUILD_NUMBER%'
+		       //Ready! Next, we will access the URL http://localhost:4200/ 
+		       //and check if the application is working inside the Docker container.
 
 		     }
 		}
