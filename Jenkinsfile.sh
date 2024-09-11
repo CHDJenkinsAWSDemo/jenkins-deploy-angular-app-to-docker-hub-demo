@@ -20,47 +20,47 @@ pipeline {
 				 //docker system prune -a -f
 				
        			 //Remove old and unused Docker images from Docker
-       			 bat 'docker image prune --all --force'            			 
+       			 sh 'docker image prune --all --force'            			 
        			 
   		 	 }
 		}        
         stage('Build Docker Image by Dockerfile') {
    			 steps {
 
-       			 bat 'docker build -t charleshoanduong1111/jenkins:build_%BUILD_NUMBER% .'
+       			 sh 'docker build -t charleshoanduong1111/jenkins:build_$BUILD_NUMBER .'
        			 
   		 	 }
 		}
 		stage('Login to Docker Hub') {
     		steps {
 
-				bat 'echo DOCKERHUB_CREDENTIALS = $DOCKERHUB_CREDENTIALS '
-				bat 'echo DOCKERHUB_CREDENTIALS_USR = $DOCKERHUB_CREDENTIALS_USR '
-        		bat 'echo DOCKERHUB_CREDENTIALS_PSW = $DOCKERHUB_CREDENTIALS_PSW'
+				sh 'echo DOCKERHUB_CREDENTIALS = $DOCKERHUB_CREDENTIALS '
+				sh 'echo DOCKERHUB_CREDENTIALS_USR = $DOCKERHUB_CREDENTIALS_USR '
+        		sh 'echo DOCKERHUB_CREDENTIALS_PSW = $DOCKERHUB_CREDENTIALS_PSW'
         		
-        		bat 'docker login -u=$DOCKERHUB_CREDENTIALS_USR  -p=$DOCKERHUB_CREDENTIALS_PSW'          		
+        		sh 'docker login -u=$DOCKERHUB_CREDENTIALS_USR  -p=$DOCKERHUB_CREDENTIALS_PSW'          		
     		}
 		}
 		stage('Push Image from Docker to Docker Hub for sharing to world users') {
     		steps {					
 
-        		bat 'docker push charleshoanduong1111/jenkins:build_$BUILD_NUMBER'  
+        		sh 'docker push charleshoanduong1111/jenkins:build_$BUILD_NUMBER'  
    			}
 		}	
 		stage('Deploy Application | Push Image from Docker to Docker Hub for sharing to world users') {
     		steps {					
 
-        		bat 'docker push charleshoanduong1111/jenkins:build_$BUILD_NUMBER'  
+        		sh 'docker push charleshoanduong1111/jenkins:build_$BUILD_NUMBER'  
    			}
 		}
 		stage('Run Angular App | Start a container from a docker image') {
     		steps {					
         	    
         	    //Run container from image online 
-        	    //bat 'docker run -p 4200:4200 --name chdjob_$BUILD_NUMBER charleshoanduong1111/jenkins:build_%BUILD_NUMBER%'
+        	    //sh 'docker run -p 4200:4200 --name chdjob_$BUILD_NUMBER charleshoanduong1111/jenkins:build_%BUILD_NUMBER%'
 
 		        //Use "docker run -d" will start a container from image, and the container will run in background
-        	    bat 'docker run -d -p 4200:4200 --name chdjob_$BUILD_NUMBER charleshoanduong1111/jenkins:build_%BUILD_NUMBER%'
+        	    sh 'docker run -d -p 4200:4200 --name chdjob_$BUILD_NUMBER charleshoanduong1111/jenkins:build_%BUILD_NUMBER%'
         	    //Ready! Next, test by accessing the URL http://localhost:4200/ 
    			}
 		}
@@ -70,7 +70,7 @@ pipeline {
   				echo 'Waiting 5 minutes for running angular app, then delete the container'
   				sleep 300 // seconds	
      
-		      	bat 'docker stop chdjob_$BUILD_NUMBER && docker rm -f chdjob_$BUILD_NUMBER'
+		      	sh 'docker stop chdjob_$BUILD_NUMBER && docker rm -f chdjob_$BUILD_NUMBER'
 
    			}
 		}		
